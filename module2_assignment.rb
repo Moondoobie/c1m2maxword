@@ -89,24 +89,23 @@ class Solution
     @highest_count_across_lines = 0
     @highest_count_words_across_lines = []
     @analyzers.each do |lineAnalyzer|
-      puts "*"
       puts lineAnalyzer.highest_wf_count
-      puts "**"
       puts highest_count_across_lines
-      puts "***"
-      #puts highest_count_words_across_lines
-      puts "****"
+      puts highest_count_words_across_lines
       if (highest_count_across_lines < lineAnalyzer.highest_wf_count)
         @highest_count_across_lines = lineAnalyzer.highest_wf_count
-        #@highest_count_words_across_lines << lineAnalyzer.highest_wf_count.key
       end
     end
-    puts "## #### ##"
-    puts "## #### ##"
-    puts highest_count_across_lines
-    #puts highest_count_words_across_lines
-    puts "## #### ##"
-    puts "## #### ##"
+    #TODO    new_arr = a.select { |num| num > 4 } 
+    @highest_count_words_across_lines = analyzers.select { |la| la.highest_wf_count == highest_count_across_lines}
+    
+
+    # @highest_count_words_across_lines = highest_count_words_across_lines.keys
+    # puts "## #### ##"
+    # puts highest_count_across_lines
+    # puts print_highest_word_frequency_across_lines
+    # puts "## #### ##"
+
     #* identifies the LineAnalyzer objects in the analyzers array that have highest_wf_count equal to highest_count_across_lines 
     #  attribute value determined previously and stores them in highest_count_words_across_lines.
   end
@@ -117,6 +116,9 @@ class Solution
     #  highest_count_words_across_lines in the specified format
     #* print the values of objects in highest_count_words_across_lines in the specified format
     # "#{one} multiplied by #{two} equals #{one * two}" 
+    puts "The following words have the highest word frequency per line:"
+    puts #["word1"] (appears in line #)
+    puts #["word2", "word3"] (appears in line #)
   end
 
 end
