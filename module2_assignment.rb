@@ -1,8 +1,7 @@
-#Implement all parts of this assignment within (this) module2_assignment2.rb file
-
 class LineAnalyzer
   attr_reader :highest_wf_count, # a number with maximum number of occurrences for a single word (calculated)
               :highest_wf_words, # an array of words with the maximum number of occurrences (calculated)
+              :highest_wf_kvpairs
               :content, # the string analyzed (provided)
               :line_number # the line number analyzed (provided)
 
@@ -37,9 +36,9 @@ class LineAnalyzer
       end 
 
       p word_frequency # => {"chicka" => 2, "boom" => 2}
-      highest_wf_count = word_frequency.values.max
-      highest_wf_kvpairs = word_frequency.select {|k, v| v == highest_wf_count}
-      highest_wf_words = highest_wf_kvpairs.keys
+      self.highest_wf_count = word_frequency.values.max
+      self.highest_wf_kvpairs = word_frequency.select {|k, v| v == highest_wf_count}
+      self.highest_wf_words = highest_wf_kvpairs.keys
       #highest_wf_words << word_frequency.word(highest_wf_count)
   end
 end
@@ -59,6 +58,7 @@ class Solution
     @@analyzers = []
   end
 
+
   #* analyze_file() - processes 'test.txt' into an array of LineAnalyzers and stores them in analyzers.
   def analyze_file
     #* Read the 'test.txt' file in lines 
@@ -67,15 +67,26 @@ class Solution
       File.foreach( 'test.txt' ) do |line|
         p line.chomp
         line_number = 1 if line_number == nil
+        
         #* Create an array of LineAnalyzers for each line in the file
+        
         lineAnalyzer = LineAnalyzer.new(line, line_number)
         @@analyzers << self
-        line_number ++
+        line_number = line_number + 1
+      
       end
 
     end
 
   end
+
+
+
+
+
+
+
+
 
   def calculate_line_with_highest_frequency
     # hash.key(value) => key
@@ -83,12 +94,13 @@ class Solution
     #  highest_count_words_across_lines attribute values 
     #* calculate the maximum value for highest_wf_count contained by the LineAnalyzer objects in analyzers array
     #  and stores this result in the highest_count_across_lines attribute.
-    @@analyzers.LineAnalyzer.highest_wf_count.max { |a, b|  }
+    @@analyzers.LineAnalyzer.highest_wf_count.max { |a, b|  }  #undefined method LineAnalyzer - error TODO
     
     #* identifies the LineAnalyzer objects in the analyzers array that have highest_wf_count equal to highest_count_across_lines 
     #  attribute value determined previously and stores them in highest_count_words_across_lines.
   end
   
+
 
   def print_highest_word_frequency_across_lines
     #* print_highest_word_frequency_across_lines() - prints the values of LineAnalyzer objects in
@@ -96,7 +108,9 @@ class Solution
     #* print the values of objects in highest_count_words_across_lines in the specified format
     # "#{one} multiplied by #{two} equals #{one * two}" 
   end
-  
+
+
+
+
+
 end
-
-
