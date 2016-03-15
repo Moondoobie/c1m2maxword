@@ -25,7 +25,6 @@ class LineAnalyzer
       #* identify the words that were used the maximum number of times and
       #  store that in the highest_wf_words attribute.
       
-      # line = "The store the bore and the floor my oh more."
       word_frequency = Hash.new(0)
       highest_wf_count = 0
       highest_wf_kvpairs = []
@@ -62,17 +61,12 @@ class Solution
   def analyze_file
     #* Read the 'test.txt' file in lines 
     if File.exist? 'test.txt'
-      
+      line_num = 0
       File.foreach( 'test.txt' ) do |line|
         p line.chomp
-        line_number = 0 if line_number == nil
-        line_number = line_number + 1
-        
-        #* Create an array of LineAnalyzers for each line in the file
-        
-        lineAnalyzer = LineAnalyzer.new(line, line_number)
+        line_num = line_num + 1
+        lineAnalyzer = LineAnalyzer.new(line, line_num)
         @analyzers << lineAnalyzer
-          
       end
 
     end
@@ -88,6 +82,7 @@ class Solution
     #  and stores this result in the highest_count_across_lines attribute.
     @highest_count_across_lines = 0
     @highest_count_words_across_lines = []
+
     @analyzers.each do |lineAnalyzer|
       puts lineAnalyzer.highest_wf_count
       puts highest_count_across_lines
@@ -98,7 +93,7 @@ class Solution
       end
 
     end
-    #TODO    new_arr = a.select { |num| num > 4 } 
+
     @highest_count_words_across_lines = analyzers.select { |la| la.highest_wf_count == highest_count_across_lines}
     
     #* identifies the LineAnalyzer objects in the analyzers array that have highest_wf_count equal to highest_count_across_lines 
@@ -110,7 +105,6 @@ class Solution
     #* print_highest_word_frequency_across_lines() - prints the values of LineAnalyzer objects in
     #  highest_count_words_across_lines in the specified format
     #* print the values of objects in highest_count_words_across_lines in the specified format
-    # "#{one} multiplied by #{two} equals #{one * two}" 
     puts "The following words have the highest word frequency per line:"
     @highest_count_words_across_lines.each do |la|
       puts "#{la.highest_wf_words} (appears in line ##{la.line_number})"   #["word1"] (appears in line #)
